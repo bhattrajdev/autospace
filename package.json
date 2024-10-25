@@ -10,7 +10,8 @@
     "tsc": "pnpm --parallel -r run tsc",
     "lint": "pnpm --parallel -r run lint",
     "build": "pnpm --parallel -r run build",
-    "validate": "pnpm format:write && pnpm tsc && pnpm lint && pnpm build",
+    "validate": "pnpm format:write && pnpm tsc && pnpm lint",
+    "validate-and-build": "pnpm format:write && pnpm tsc && pnpm lint && pnpm build",
     "prepare": "husky install"
   },
   "keywords": [],
