@@ -4,11 +4,67 @@ import { RestrictProperties } from 'src/common/dtos/common.input'
 
 @InputType()
 export class UserWhereUniqueInput {
-  id: number
+  uid: string
 }
 
 @InputType()
-export class UserWhereInputStrict implements RestrictProperties<UserWhereInputStrict, Prisma.UserWhereInput> {
+export class UserWhereInputStrict
+  implements
+    RestrictProperties<
+      UserWhereInputStrict,
+      Omit<Prisma.UserWhereInput, 'Credentials'| 'AuthProvider'| 'Admin'>
+    >
+{
+  uid: string | Prisma.StringFilter<'User'>
+  createdAt: string | Date | Prisma.DateTimeFilter<'User'>
+  updatedAt: string | Date | Prisma.DateTimeFilter<'User'>
+  name: string | Prisma.StringNullableFilter<'User'>
+  image: string | Prisma.StringNullableFilter<'User'>
+  Credentials:
+    | (Prisma.Without<
+        Prisma.CredentialsNullableRelationFilter,
+        Prisma.CredentialsWhereInput
+      > &
+        Prisma.CredentialsWhereInput)
+    | (Prisma.Without<
+        Prisma.CredentialsWhereInput,
+        Prisma.CredentialsNullableRelationFilter
+      > &
+        Prisma.CredentialsNullableRelationFilter)
+
+  Manager:
+    | (Prisma.Without<
+        Prisma.ManagerNullableRelationFilter,
+        Prisma.ManagerWhereInput
+      > &
+        Prisma.ManagerWhereInput)
+    | (Prisma.Without<
+        Prisma.ManagerWhereInput,
+        Prisma.ManagerNullableRelationFilter
+      > &
+        Prisma.ManagerNullableRelationFilter)
+  Valet:
+    | (Prisma.Without<
+        Prisma.ValetNullableRelationFilter,
+        Prisma.ValetWhereInput
+      > &
+        Prisma.ValetWhereInput)
+    | (Prisma.Without<
+        Prisma.ValetWhereInput,
+        Prisma.ValetNullableRelationFilter
+      > &
+        Prisma.ValetNullableRelationFilter)
+  Customer:
+    | (Prisma.Without<
+        Prisma.CustomerNullableRelationFilter,
+        Prisma.CustomerWhereInput
+      > &
+        Prisma.CustomerWhereInput)
+    | (Prisma.Without<
+        Prisma.CustomerWhereInput,
+        Prisma.CustomerNullableRelationFilter
+      > &
+        Prisma.CustomerNullableRelationFilter)
   // Todo: Add the below field decorator only to the $Enums types.
   // @Field(() => $Enums.x)
 
@@ -18,9 +74,7 @@ export class UserWhereInputStrict implements RestrictProperties<UserWhereInputSt
 }
 
 @InputType()
-export class UserWhereInput extends PartialType(
-  UserWhereInputStrict,
-) {}
+export class UserWhereInput extends PartialType(UserWhereInputStrict) {}
 
 @InputType()
 export class UserListRelationFilter {

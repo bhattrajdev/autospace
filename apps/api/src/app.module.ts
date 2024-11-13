@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { join } from 'path'
 import { ConfigModule } from '@nestjs/config'
+import { PrismaModule } from './common/prisma/prisma.module'
 
 @Module({
   imports: [
@@ -18,6 +19,8 @@ import { ConfigModule } from '@nestjs/config'
         numberScalarMode: 'integer',
       },
     }),
+
+    PrismaModule
   ],
   controllers: [AppController],
   providers: [AppService],
